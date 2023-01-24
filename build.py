@@ -32,7 +32,7 @@ def get_personal_data():
             <div class="col-sm-12" style="">
                 <h4>Homepage Template</h4>
                 <p>
-                    This page is based on the amazing template from <a href="https://uni-tuebingen.de/" target="_blank">Michael Niemeyer</a>. Checkout his <a href="https://github.com/m-niemeyer/m-niemeyer.github.io" target="_blank">github repository</a> for instructions on how to use it.</a><br>
+                    This page is based on the amazing template from <a href="https://m-niemeyer.github.io/" target="_blank">Michael Niemeyer</a>. Checkout his <a href="https://github.com/m-niemeyer/m-niemeyer.github.io" target="_blank">github repository</a> for instructions on how to use it.</a><br>
                     <a href="https://m-niemeyer.github.io/" target="_blank">&#9883;</a>
                     <a href="https://kashyap7x.github.io/" target="_blank">&#9883;</a>
                     <a href="https://kait0.github.io/" target="_blank">&#9883;</a>
