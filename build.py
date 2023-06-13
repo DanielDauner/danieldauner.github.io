@@ -9,7 +9,7 @@ def get_personal_data():
     linkedin = "daniel-dauner"
     bio_text = f"""
     
-                <p>I am a master's student in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am excited about deep learning, computer vision, and robotics. </p>
+                <p>I am a master's student in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am excited about deep learning, computer vision, and robotics. <span style="color: red; font-weight: bold;">I will finish my master's thesis by August 2023 and I am actively searching for phd positions!</span>
                 <p>
                     <span style="font-weight: bold;">Bio:</span>
                     I did a bachelor's degree in bioinformatics at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. Following that, I started my master's in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am writing my thesis about the <a href="https://www.nuscenes.org/nuplan" target="_blank">nuPlan challenge</a> in the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, led by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>.
@@ -18,7 +18,7 @@ def get_personal_data():
                     <span style="font-weight: bold;">Awards:</span>
                     At the chair of <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/kognitive-systeme/the-chair/staff/prof-dr-andreas-zell/" target="_blank">Prof. Andreas Zell</a>, I won the Diana Chess AI competition in 2020 and the <a href="https://www.kaggle.com/c/uni-tuebingen-deep-learning-2021" target="_blank">Deep Learning competition</a> in 2021 (<a href="https://github.com/DanielDauner/DLChallenge2021" target="_blank">code</a>). 
                     In the winter term 2021/2022, I competed in the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/lectures/self-driving-cars/" target="_blank">Self-Driving Cars lecture</a> by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>, where I won all three challenges about imitation learning, reinforcement learning, and modular pipeline agents.  
-
+                    Recently, our team won the <a href="https://eval.ai/web/challenges/challenge-page/1856/leaderboard/4360" target="_blank">2023 nuPlan planning challenge</a>!
                 </p>
                 <p>Feel free to contact me via mail!</p>
                 <p>
@@ -33,9 +33,6 @@ def get_personal_data():
                 <h4>Homepage Template</h4>
                 <p>
                     This page is based on the amazing template from <a href="https://m-niemeyer.github.io/" target="_blank">Michael Niemeyer</a>. Checkout his <a href="https://github.com/m-niemeyer/m-niemeyer.github.io" target="_blank">github repository</a> for instructions on how to use it.</a><br>
-                    <a href="https://m-niemeyer.github.io/" target="_blank">&#9883;</a>
-                    <a href="https://kashyap7x.github.io/" target="_blank">&#9883;</a>
-                    <a href="https://kait0.github.io/" target="_blank">&#9883;</a>
                 </p>
             </div>
     """
@@ -62,6 +59,7 @@ def get_author_dict():
         'Lars Mescheder': 'https://scholar.google.de/citations?user=h2k1gL4AAAAJ&hl=de',
         'Thilo Strauss': 'https://scholar.google.com/citations?user=VlymtLQAAAAJ&hl=en',
         'Sebastian Nowozin': 'http://www.nowozin.net/sebastian/',
+        'Kashyap Chitta': 'https://kashyap7x.github.io/',
     }
 
 
@@ -88,17 +86,22 @@ def get_paper_entry(entry_key, entry):
     s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
-
-    if 'award' in entry.fields.keys():
-        s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
-    else:
-        s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
+    s += f"""{entry.fields['title']}<br>"""
+    
+    # TODO: add html refs
+    # if 'award' in entry.fields.keys():
+    #     s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
+    # else:
+    #     s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
 
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
 
-    artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental',
-                 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
+    # artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental',
+    #              'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
+
+    artefacts = {'pdf': 'PDF', 'video': 'Video', 'code': 'Code'}
+
     i = 0
     for (k, v) in artefacts.items():
         if k in entry.fields.keys():
@@ -112,8 +115,10 @@ def get_paper_entry(entry_key, entry):
     cite = "<pre><code>@InProceedings{" + f"{entry_key}, \n"
     cite += "\tauthor = {" + \
         f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
+    
     for entr in ['title', 'booktitle', 'year']:
         cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
+
     cite += """}</pre></code>"""
     s += " /" + \
         f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
@@ -227,12 +232,6 @@ def get_index_html():
                 <img src="assets/img/profile.jpg" class="img-thumbnail" width="280px" alt="Profile picture">
             </div>
         </div>
-        <!-- <div class="row" style="margin-top: 1em;">
-            <div class="col-sm-12" style="">
-                <h4>Publications</h4>
-                {pub}
-            </div>
-        </div> -->
         <!-- <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>Talks</h4>
@@ -242,12 +241,21 @@ def get_index_html():
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>News</h4>
-                <table>
-                     <tr>
-                       <td>Feb, 2023 &#8194;</td>
-                       <td> I started my master's thesis at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a>.</td>
-                     </tr>
-                </table> 
+                    <table>
+                        <tr>
+                        <td>Jun, 2023 &#8194;</td>
+                        <td> We won the <a href="https://eval.ai/web/challenges/challenge-page/1856/leaderboard/4360" target="_blank">2023 nuPlan planning challenge</a>!</td>
+                        </tr>
+                        <tr>
+                        <td>Feb, 2023 &#8194;</td>
+                        <td> I started my master's thesis at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a>.</td>
+                        </tr>
+                    </table> 
+            </div>
+        <div class="row" style="margin-top: 3em;">
+            <div class="col-sm-12" style="">
+                <h4>Publications</h4>
+                {pub}
             </div>
         </div>
         <div class="row" style="margin-top: 3em;">
