@@ -9,7 +9,7 @@ def get_personal_data():
     linkedin = "daniel-dauner"
     bio_text = f"""
     
-                <p>I am a master's student in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am excited about deep learning, computer vision, and robotics. <span style="color: red; font-weight: bold;">I will finish my master's thesis by August 2023 and I am actively searching for phd positions!</span>
+                <p>I am a master's student in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am excited about deep learning, computer vision, and robotics. <span style="color: red; font-weight: bold;">I will finish my master's thesis by August 2023 and I am searching for phd positions!</span>
                 <p>
                     <span style="font-weight: bold;">Bio:</span>
                     I did a bachelor's degree in bioinformatics at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. Following that, I started my master's in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am writing my thesis about the <a href="https://www.nuscenes.org/nuplan" target="_blank">nuPlan challenge</a> in the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, led by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>.
@@ -18,7 +18,7 @@ def get_personal_data():
                     <span style="font-weight: bold;">Awards:</span>
                     At the chair of <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/kognitive-systeme/the-chair/staff/prof-dr-andreas-zell/" target="_blank">Prof. Andreas Zell</a>, I won the Diana Chess AI competition in 2020 and the <a href="https://www.kaggle.com/c/uni-tuebingen-deep-learning-2021" target="_blank">Deep Learning competition</a> in 2021 (<a href="https://github.com/DanielDauner/DLChallenge2021" target="_blank">code</a>). 
                     In the winter term 2021/2022, I competed in the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/lectures/self-driving-cars/" target="_blank">Self-Driving Cars lecture</a> by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>, where I won all three challenges about imitation learning, reinforcement learning, and modular pipeline agents.  
-                    Recently, our team won the <a href="https://eval.ai/web/challenges/challenge-page/1856/leaderboard/4360" target="_blank">2023 nuPlan planning challenge</a>!
+                    Recently, our team won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan planning challenge</a>!
                 </p>
                 <p>Feel free to contact me via mail!</p>
                 <p>
@@ -42,24 +42,9 @@ def get_personal_data():
 def get_author_dict():
     return {
         'Andreas Geiger': 'https://www.cvlibs.net/',
-        'Songyou Peng': 'https://pengsongyou.github.io/',
-        'Zehao Yu': 'https://niujinshuchong.github.io/',
-        'Torsten Sattler': 'https://tsattler.github.io/',
-        'Katja Schwarz': 'https://katjaschwarz.github.io/',
-        'Axel Sauer': 'https://axelsauer.com/',
-        'Jonathan Barron': 'https://jonbarron.info/',
-        'Ben Mildenhall': 'https://bmild.github.io/',
-        'Mehdi Sajjadi': 'https://msajjadi.com/',
-        'Noha Radwan': 'http://www2.informatik.uni-freiburg.de/~radwann/',
-        'Chiyu Jiang': 'https://www.maxjiang.ml/',
-        'Yiyi Liao': 'https://yiyiliao.github.io/',
-        'Marc Pollefeys': 'https://people.inf.ethz.ch/pomarc/',
-        'Michael Oechsle': 'https://moechsle.github.io/',
-        'Christian Reiser': 'https://creiser.github.io/',
-        'Lars Mescheder': 'https://scholar.google.de/citations?user=h2k1gL4AAAAJ&hl=de',
-        'Thilo Strauss': 'https://scholar.google.com/citations?user=VlymtLQAAAAJ&hl=en',
-        'Sebastian Nowozin': 'http://www.nowozin.net/sebastian/',
         'Kashyap Chitta': 'https://kashyap7x.github.io/',
+        'Marcel Hallgarten': 'https://mh0797.github.io/',
+        'Bálint Mucsányi': 'https://www.linkedin.com/in/b%C3%A1lint-mucs%C3%A1nyi-148a47222/',
     }
 
 
@@ -88,7 +73,7 @@ def get_paper_entry(entry_key, entry):
     s += """</div><div class="col-sm-9">"""
     s += f"""{entry.fields['title']}<br>"""
     
-    # TODO: add html refs
+    # FIXME: add html refs
     # if 'award' in entry.fields.keys():
     #     s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
     # else:
@@ -100,7 +85,7 @@ def get_paper_entry(entry_key, entry):
     # artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental',
     #              'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
 
-    artefacts = {'pdf': 'PDF', 'video': 'Video', 'code': 'Code'}
+    artefacts = {'pdf': 'PDF', 'supp': 'Supplemental', 'video': 'Video', 'code': 'Code'}
 
     i = 0
     for (k, v) in artefacts.items():
@@ -244,7 +229,7 @@ def get_index_html():
                     <table>
                         <tr>
                         <td>Jun, 2023 &#8194;</td>
-                        <td> We won the <a href="https://eval.ai/web/challenges/challenge-page/1856/leaderboard/4360" target="_blank">2023 nuPlan planning challenge</a>!</td>
+                        <td> We won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan planning challenge</a>!</td>
                         </tr>
                         <tr>
                         <td>Feb, 2023 &#8194;</td>
