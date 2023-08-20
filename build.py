@@ -71,22 +71,24 @@ def get_paper_entry(entry_key, entry):
     s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
-    s += f"""{entry.fields['title']}<br>"""
-    
-    # FIXME: add html refs
-    # if 'award' in entry.fields.keys():
-    #     s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
-    # else:
-    #     s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
+
+    if 'award' in entry.fields.keys():
+        s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
+    else:
+        if 'html' in entry.fields.keys():
+            s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
+        else:
+            s += f"""{entry.fields['title']} <br>"""
 
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
-    s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
+    if 'booktitle' in entry.fields.keys():
+        s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
+    elif 'journal' in entry.fields.keys():
+        s += f"""<span style="font-style: italic;">{entry.fields['journal']}</span>, {entry.fields['year']} <br>"""
+    else:
+        s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
 
-    # artefacts = {'html': 'Project Page', 'pdf': 'Paper', 'supp': 'Supplemental',
-    #              'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
-
-    artefacts = {'pdf': 'PDF', 'supp': 'Supplemental', 'video': 'Video', 'code': 'Code'}
-
+    artefacts = {'pdf': 'PDF', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
     i = 0
     for (k, v) in artefacts.items():
         if k in entry.fields.keys():
@@ -94,19 +96,14 @@ def get_paper_entry(entry_key, entry):
                 s += ' / '
             s += f"""<a href="{entry.fields[k]}" target="_blank">{v}</a>"""
             i += 1
-        else:
-            print(f'[{entry_key}] Warning: Field {k} missing!')
 
-    cite = "<pre><code>@InProceedings{" + f"{entry_key}, \n"
-    cite += "\tauthor = {" + \
-        f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
-    
-    for entr in ['title', 'booktitle', 'year']:
-        cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
-
+    cite = f"<pre><code>@{entry.original_type}{{" + f"{entry_key}, \n"
+    cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
+    for entr in ['title', 'booktitle', 'year', 'school', 'journal', 'volume']:
+        if entr in entry.fields.keys():
+            cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
     cite += """}</pre></code>"""
-    s += " /" + \
-        f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
+    s += " /" + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
     s += """ </div> </div> </div>"""
     return s
 
