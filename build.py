@@ -33,7 +33,7 @@ def get_personal_data():
     """
     footer = """
             <div class="col-sm-12" style="">
-                <h4>Homepage Template</h4>
+                <h4>Template</h4>
                 <p>
                     This page is based on the amazing template from <a href="https://m-niemeyer.github.io/" target="_blank">Michael Niemeyer</a>. Checkout his <a href="https://github.com/m-niemeyer/m-niemeyer.github.io" target="_blank">github repository</a> for instructions on how to use it.</a><br>
                 </p>
@@ -138,6 +138,7 @@ def get_theses_entry(entry_key, entry):
     s += """</div><div class="col-sm-9">"""
     s += f"""{entry.fields['title']}<br>"""
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
+    s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
 
     artefacts = {'pdf': 'PDF', 'video': 'Video', 'code': 'Code'}
     i = 0
@@ -149,8 +150,8 @@ def get_theses_entry(entry_key, entry):
             i += 1
         else:
             print(f'[{entry_key}] Warning: Field {k} missing!')
+    
 
-    # s += """ </div> </div> </div>"""
     cite = f"<pre><code>@{entry.original_type}{{" + f"{entry_key}, \n"
     cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
     for entr in ['title', 'booktitle', 'year', 'school', 'journal', 'volume']:
