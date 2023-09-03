@@ -7,12 +7,13 @@ def get_personal_data():
     twitter = "DanielDauner"
     github = "DanielDauner"
     linkedin = "daniel-dauner"
+    youtube = "@danieldauner"
     bio_text = f"""
     
-                <p>I am a master's student in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am excited about deep learning, computer vision, and robotics. <span style="color: red; font-weight: bold;">I will finish my master's thesis by August 2023 and I am searching for phd positions!</span>
+                <p>I am a master's student in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am excited about deep learning, computer vision, and robotics. <span style="color: red; font-weight: bold;">I just finished my master's thesis and I am searching for phd positions!</span>
                 <p>
                     <span style="font-weight: bold;">Bio:</span>
-                    I did a bachelor's degree in bioinformatics at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. Following that, I started my master's in computer science at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. I am writing my thesis about the <a href="https://www.nuscenes.org/nuplan" target="_blank">nuPlan challenge</a> in the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, led by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>.
+                    I did a bachelor's degree in bioinformatics and a master's degree in computer science both at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>. Currently, I am working as a research assistant at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>.
                 </p>
                 <p>
                     <span style="font-weight: bold;">Awards:</span>
@@ -22,10 +23,12 @@ def get_personal_data():
                 </p>
                 <p>Feel free to contact me via mail!</p>
                 <p>
-                    <a href="mailto:daniel.dauner@gmail.com" style="margin-right: 15px"><i class="far fa-envelope-open fa-lg"></i> Mail</a>
-                    <a href="https://github.com/DanielDauner" target="_blank" style="margin-right: 15px"><i class="fab fa-github fa-lg"></i> Github</a>
-                    <a href="https://twitter.com/DanielDauner" target="_blank" style="margin-right: 15px"><i class="fab fa-twitter fa-lg"></i> Twitter</a>
-                    <a href="https://www.linkedin.com/in/daniel-dauner" target="_blank" style="margin-right: 15px"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
+                    <a href="https://danieldauner.github.io/assets/pdf/DaunerCV.pdf" target="_blank" style="margin-right: 15px"><i class="fa fa-address-card fa-lg"></i> CV</a>
+                    <a href="mailto:{email}" style="margin-right: 15px"><i class="far fa-envelope-open fa-lg"></i> Mail</a>
+                    <a href="https://github.com/{github}" target="_blank" style="margin-right: 15px"><i class="fab fa-github fa-lg"></i> Github</a>
+                    <a href="https://twitter.com/{twitter}" target="_blank" style="margin-right: 15px"><i class="fab fa-twitter fa-lg"></i> Twitter</a>
+                    <a href="https://www.linkedin.com/in/{linkedin}" target="_blank" style="margin-right: 15px"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
+                    <a href="https://www.youtube.com/{youtube}" target="_blank" style="margin-right: 15px"><i class="fab fa-youtube fa-lg"></i> YouTube</a>
                 </p>
     """
     footer = """
@@ -129,7 +132,7 @@ def get_talk_entry(entry_key, entry):
     return s
 
 
-def get_project_entry(entry_key, entry):
+def get_theses_entry(entry_key, entry):
     s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
@@ -147,6 +150,14 @@ def get_project_entry(entry_key, entry):
         else:
             print(f'[{entry_key}] Warning: Field {k} missing!')
 
+    # s += """ </div> </div> </div>"""
+    cite = f"<pre><code>@{entry.original_type}{{" + f"{entry_key}, \n"
+    cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
+    for entr in ['title', 'booktitle', 'year', 'school', 'journal', 'volume']:
+        if entr in entry.fields.keys():
+            cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
+    cite += """}</pre></code>"""
+    s += " /" + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
     s += """ </div> </div> </div>"""
     return s
 
@@ -171,20 +182,20 @@ def get_talks_html():
     return s
 
 
-def get_projects_html():
+def get_theses_html():
     parser = bibtex.Parser()
-    bib_data = parser.parse_file('projects_list.bib')
+    bib_data = parser.parse_file('theses_list.bib')
     keys = bib_data.entries.keys()
     s = ""
     for k in keys:
-        s += get_project_entry(k, bib_data.entries[k])
+        s += get_theses_entry(k, bib_data.entries[k])
     return s
 
 
 def get_index_html():
     pub = get_publications_html()
     talks = get_talks_html()
-    projects = get_projects_html()
+    theses = get_theses_html()
     name, bio_text, footer = get_personal_data()
     s = f"""
     <!doctype html>
@@ -219,7 +230,7 @@ def get_index_html():
                 <h4>Talks</h4>
                 {talks}
             </div>
-        </div> -->
+        </div> 
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>News</h4>
@@ -233,7 +244,7 @@ def get_index_html():
                         <td> I started my master's thesis at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a>.</td>
                         </tr>
                     </table> 
-            </div>
+            </div> -->
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>Publications</h4>
@@ -242,8 +253,8 @@ def get_index_html():
         </div>
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
-                <h4>Lecture Projects</h4>
-                {projects}
+                <h4>Theses</h4>
+                {theses}
             </div>
         </div> 
         <div class="row" style="margin-top: 3em; margin-bottom: 1em;">
