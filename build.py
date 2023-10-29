@@ -20,7 +20,7 @@ def get_personal_data():
                 <p>
                     <span style="font-weight: bold;">Bio:</span>
                     I received my BSc in Bioinformatics in 2021 and my MSc in Computer Science in 2023 (with distinction) at the University of Tübingen. 
-                    The highlight of my master's education was developing a vehicle motion planner that won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan planning challenge</a>. 
+                    The highlight of my master's education was developing a vehicle motion planner that won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan challenge</a>. 
                     Currently, I am a research assistant at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
                 </p>
                 <p>For any inquiries, feel free to write an email!</p>
@@ -50,11 +50,11 @@ def get_author_dict():
         'Andreas Geiger': 'https://www.cvlibs.net/',
         'Kashyap Chitta': 'https://kashyap7x.github.io/',
         'Marcel Hallgarten': 'https://mh0797.github.io/',
-        'Bálint Mucsányi': 'https://www.linkedin.com/in/b%C3%A1lint-mucs%C3%A1nyi-148a47222/',
+        'Bálint Mucsányi': 'https://bmucsanyi.github.io/',
     }
 
 
-def generate_person_html(persons, connection=", ", make_bold=True, make_bold_name='Daniel', add_links=True):
+def generate_person_html(persons, connection=", ", make_bold=True, make_bold_name='Daniel Dauner', add_links=True):
     links = get_author_dict() if add_links else {}
     s = ""
     for p in persons:
@@ -94,7 +94,7 @@ def get_paper_entry(entry_key, entry):
     else:
         s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
 
-    artefacts = {'pdf': 'PDF', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
+    artefacts = {'pdf': 'Paper', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
     i = 0
     for (k, v) in artefacts.items():
         if k in entry.fields.keys():
@@ -139,11 +139,18 @@ def get_theses_entry(entry_key, entry):
     s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
-    s += f"""{entry.fields['title']}<br>"""
+    # s += f"""{entry.fields['title']}<br>"""
+    if 'award' in entry.fields.keys():
+        s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
+    else:
+        if 'html' in entry.fields.keys():
+            s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
+        else:
+            s += f"""{entry.fields['title']} <br>"""
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
 
-    artefacts = {'pdf': 'PDF', 'video': 'Video', 'code': 'Code'}
+    artefacts = {'pdf': 'Paper', 'video': 'Video', 'code': 'Code'}
     i = 0
     for (k, v) in artefacts.items():
         if k in entry.fields.keys():
@@ -241,7 +248,7 @@ def get_index_html():
                     <table>
                         <tr>
                         <td>Jun, 2023 &#8194;</td>
-                        <td> We won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan planning challenge</a>!</td>
+                        <td> We won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan challenge</a>!</td>
                         </tr>
                         <tr>
                         <td>Feb, 2023 &#8194;</td>
