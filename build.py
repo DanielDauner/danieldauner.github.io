@@ -21,7 +21,7 @@ def get_personal_data():
                     <span style="font-weight: bold;">Bio:</span>
                     I received my BSc in Bioinformatics in 2021 and my MSc in Computer Science in 2023 (with distinction) at the University of Tübingen. 
                     The highlight of my master's education was developing a vehicle motion planner that won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan challenge</a>. 
-                    Currently, I am a research assistant at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
+                    Currently, I am a research intern at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
                 </p>
                 <p>For any inquiries, feel free to write an email!</p>
                 <p>
@@ -135,7 +135,7 @@ def get_talk_entry(entry_key, entry):
     return s
 
 
-def get_theses_entry(entry_key, entry):
+def get_uni_entry(entry_key, entry):
     s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
@@ -148,8 +148,12 @@ def get_theses_entry(entry_key, entry):
         else:
             s += f"""{entry.fields['title']} <br>"""
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
-    s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
-
+    
+    if 'school' in entry.fields.keys():
+        s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
+    elif 'booktitle' in entry.fields.keys():
+        s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
+    
     artefacts = {'pdf': 'Paper', 'video': 'Video', 'code': 'Code'}
     i = 0
     for (k, v) in artefacts.items():
@@ -193,20 +197,20 @@ def get_talks_html():
     return s
 
 
-def get_theses_html():
+def get_uni_html():
     parser = bibtex.Parser()
-    bib_data = parser.parse_file('theses_list.bib')
+    bib_data = parser.parse_file('uni_list.bib')
     keys = bib_data.entries.keys()
     s = ""
     for k in keys:
-        s += get_theses_entry(k, bib_data.entries[k])
+        s += get_uni_entry(k, bib_data.entries[k])
     return s
 
 
 def get_index_html():
     pub = get_publications_html()
     talks = get_talks_html()
-    theses = get_theses_html()
+    uni = get_uni_html()
     name, bio_text, footer = get_personal_data()
     s = f"""
     <!doctype html>
@@ -264,8 +268,8 @@ def get_index_html():
         </div>
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
-                <h4>Theses</h4>
-                {theses}
+                <h4>University Projects</h4>
+                {uni}
             </div>
         </div> 
         <div class="row" style="margin-top: 3em; margin-bottom: 1em;">
