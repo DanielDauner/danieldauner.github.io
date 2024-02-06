@@ -12,7 +12,7 @@ def get_personal_data():
     bio_text = f"""
     
                 <p>
-                    I am a graduate of the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>, working in the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a> of <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
+                    I am a PhD student at the <a href="https://uni-tuebingen.de/" target="_blank">University of Tübingen</a>, where I am part of the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a> and supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
                 <p>
                     <span style="font-weight: bold;">Interests:</span>
                      My research interest lies in the intersection of machine learning and robotics, where I am deeply fascinated by autonomous driving. Specifically, I am exploring data-driven simulation and representation learning for vehicle motion planning. My ultimate goal is to contribute to the realization of fully autonomous cars.
@@ -21,7 +21,7 @@ def get_personal_data():
                     <span style="font-weight: bold;">Bio:</span>
                     I received my BSc in Bioinformatics in 2021 and my MSc in Computer Science in 2023 (with distinction) at the University of Tübingen. 
                     The highlight of my master's education was developing a vehicle motion planner that won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan challenge</a>. 
-                    Currently, I am a research intern at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
+                    I recently started my PhD at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, where I am supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
                 </p>
                 <p>For any inquiries, feel free to write an email!</p>
                 <p>
