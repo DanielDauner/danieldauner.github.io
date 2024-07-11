@@ -21,11 +21,11 @@ def get_personal_data():
                     <span style="font-weight: bold;">Bio:</span>
                     I received my BSc in Bioinformatics in 2021 and my MSc in Computer Science in 2023 (with distinction) at the University of Tübingen. 
                     The highlight of my master's education was developing a vehicle motion planner that won the <a href="https://opendrivelab.com/AD23Challenge.html#nuplan_planning" target="_blank">2023 nuPlan challenge</a>. 
-                    I recently started my PhD at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, where I am supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>. 
+                    In 2024, I started my PhD at the <a href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/autonomous-vision/home/" target="_blank">Autonomous Vision Group</a>, supervised by <a href="https://www.cvlibs.net/" target="_blank">Prof. Andreas Geiger</a>, and joined the <a href="https://imprs.is.mpg.de/" target="_blank">International Max Planck Research School for Intelligent Systems</a>.
                 </p>
                 <p>For any inquiries, feel free to write an email!</p>
                 <p>
-                    <a href="https://danieldauner.github.io/assets/pdf/Dauner2023CV.pdf" target="_blank" style="margin-right: 15px"><i class="fa fa-address-card fa-lg"></i> CV</a>
+                    <a href="https://danieldauner.github.io/assets/pdf/Dauner2024CV.pdf" target="_blank" style="margin-right: 15px"><i class="fa fa-address-card fa-lg"></i> CV</a>
                     <a href="mailto:{email}" style="margin-right: 15px"><i class="far fa-envelope-open fa-lg"></i> Mail</a>
                     <a href="https://scholar.google.com/citations?user={scholar}&hl=en" target="_blank" style="margin-right: 15px"><i class="fa-solid fa-graduation-cap"></i> Scholar</a>
                     <a href="https://github.com/{github}" target="_blank" style="margin-right: 15px"><i class="fab fa-github fa-lg"></i> Github</a>
@@ -47,19 +47,25 @@ def get_personal_data():
 
 def get_author_dict():
     return {
-        'Andreas Geiger': 'https://www.cvlibs.net/',
-        'Kashyap Chitta': 'https://kashyap7x.github.io/',
-        'Marcel Hallgarten': 'https://mh0797.github.io/',
-        'Bálint Mucsányi': 'https://bmucsanyi.github.io/',
+        "Andreas Geiger": "https://www.cvlibs.net/",
+        "Kashyap Chitta": "https://kashyap7x.github.io/",
+        "Marcel Hallgarten": "https://mh0797.github.io/",
+        "Bálint Mucsányi": "https://bmucsanyi.github.io/",
     }
 
 
-def generate_person_html(persons, connection=", ", make_bold=True, make_bold_name='Daniel Dauner', add_links=True):
+def generate_person_html(
+    persons, connection=", ", make_bold=True, make_bold_name="Daniel Dauner", add_links=True, equal_contribution=None
+):
     links = get_author_dict() if add_links else {}
     s = ""
-    for p in persons:
+
+    equal_contributors = -1
+    if equal_contribution is not None:
+        equal_contributors = equal_contribution
+    for idx, p in enumerate(persons):
         string_part_i = ""
-        for name_part_i in p.get_part('first') + p.get_part('last'):
+        for name_part_i in p.get_part("first") + p.get_part("last"):
             if string_part_i != "":
                 string_part_i += " "
             string_part_i += name_part_i
@@ -67,6 +73,8 @@ def generate_person_html(persons, connection=", ", make_bold=True, make_bold_nam
             string_part_i = f'<a href="{links[string_part_i]}" target="_blank">{string_part_i}</a>'
         if make_bold and string_part_i == make_bold_name:
             string_part_i = f'<span style="font-weight: bold";>{make_bold_name}</span>'
+        if idx < equal_contributors:
+            string_part_i += "*"
         if p != persons[-1]:
             string_part_i += connection
         s += string_part_i
@@ -78,38 +86,49 @@ def get_paper_entry(entry_key, entry):
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
 
-    if 'award' in entry.fields.keys():
+    if "award" in entry.fields.keys():
         s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
     else:
-        if 'html' in entry.fields.keys():
+        if "html" in entry.fields.keys():
             s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
         else:
             s += f"""{entry.fields['title']} <br>"""
 
-    s += f"""{generate_person_html(entry.persons['author'])} <br>"""
-    if 'booktitle' in entry.fields.keys():
+    if "equal_contribution" in entry.fields.keys():
+        s += f"""{generate_person_html(entry.persons['author'], equal_contribution=int(entry.fields['equal_contribution']))} <br>"""
+    else:
+        s += f"""{generate_person_html(entry.persons['author'])} <br>"""
+
+    if "booktitle" in entry.fields.keys():
         s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
-    elif 'journal' in entry.fields.keys():
+    elif "journal" in entry.fields.keys():
         s += f"""<span style="font-style: italic;">{entry.fields['journal']}</span>, {entry.fields['year']} <br>"""
     else:
         s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
 
-    artefacts = {'pdf': 'Paper', 'supp': 'Supplemental', 'video': 'Video', 'poster': 'Poster', 'code': 'Code'}
+    artefacts = {"pdf": "Paper", "supp": "Supplemental", "video": "Video", "poster": "Poster", "code": "Code"}
     i = 0
-    for (k, v) in artefacts.items():
+    for k, v in artefacts.items():
         if k in entry.fields.keys():
             if i > 0:
-                s += ' / '
+                s += " / "
             s += f"""<a href="{entry.fields[k]}" target="_blank">{v}</a>"""
             i += 1
 
     cite = f"<pre><code>@{entry.original_type}{{" + f"{entry_key}, \n"
-    cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
-    for entr in ['title', 'booktitle', 'year', 'school', 'journal', 'volume']:
+    cite += (
+        "\tauthor = {"
+        + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}"
+        + "}, \n"
+    )
+    for entr in ["title", "booktitle", "year", "school", "journal", "volume"]:
         if entr in entry.fields.keys():
             cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
     cite += """}</pre></code>"""
-    s += " /" + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
+    s += (
+        " /"
+        + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
+    )
     s += """ </div> </div> </div>"""
     return s
 
@@ -121,16 +140,16 @@ def get_talk_entry(entry_key, entry):
     s += f"""{entry.fields['title']}<br>"""
     s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
 
-    artefacts = {'slides': 'Slides', 'video': 'Recording'}
+    artefacts = {"slides": "Slides", "video": "Recording"}
     i = 0
-    for (k, v) in artefacts.items():
+    for k, v in artefacts.items():
         if k in entry.fields.keys():
             if i > 0:
-                s += ' / '
+                s += " / "
             s += f"""<a href="{entry.fields[k]}" target="_blank">{v}</a>"""
             i += 1
         else:
-            print(f'[{entry_key}] Warning: Field {k} missing!')
+            print(f"[{entry_key}] Warning: Field {k} missing!")
     s += """ </div> </div> </div>"""
     return s
 
@@ -140,46 +159,52 @@ def get_uni_entry(entry_key, entry):
     s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
     # s += f"""{entry.fields['title']}<br>"""
-    if 'award' in entry.fields.keys():
+    if "award" in entry.fields.keys():
         s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <span style="color: red;">({entry.fields['award']})</span><br>"""
     else:
-        if 'html' in entry.fields.keys():
+        if "html" in entry.fields.keys():
             s += f"""<a href="{entry.fields['html']}" target="_blank">{entry.fields['title']}</a> <br>"""
         else:
             s += f"""{entry.fields['title']} <br>"""
     s += f"""{generate_person_html(entry.persons['author'])} <br>"""
-    
-    if 'school' in entry.fields.keys():
+
+    if "school" in entry.fields.keys():
         s += f"""<span style="font-style: italic;">{entry.fields['school']}</span>, {entry.fields['year']} <br>"""
-    elif 'booktitle' in entry.fields.keys():
+    elif "booktitle" in entry.fields.keys():
         s += f"""<span style="font-style: italic;">{entry.fields['booktitle']}</span>, {entry.fields['year']} <br>"""
-    
-    artefacts = {'pdf': 'Paper', 'video': 'Video', 'code': 'Code'}
+
+    artefacts = {"pdf": "Paper", "video": "Video", "code": "Code"}
     i = 0
-    for (k, v) in artefacts.items():
+    for k, v in artefacts.items():
         if k in entry.fields.keys():
             if i > 0:
-                s += ' / '
+                s += " / "
             s += f"""<a href="{entry.fields[k]}" target="_blank">{v}</a>"""
             i += 1
         else:
-            print(f'[{entry_key}] Warning: Field {k} missing!')
-    
+            print(f"[{entry_key}] Warning: Field {k} missing!")
 
     cite = f"<pre><code>@{entry.original_type}{{" + f"{entry_key}, \n"
-    cite += "\tauthor = {" + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}" + "}, \n"
-    for entr in ['title', 'booktitle', 'year', 'school', 'journal', 'volume']:
+    cite += (
+        "\tauthor = {"
+        + f"{generate_person_html(entry.persons['author'], make_bold=False, add_links=False, connection=' and ')}"
+        + "}, \n"
+    )
+    for entr in ["title", "booktitle", "year", "school", "journal", "volume"]:
         if entr in entry.fields.keys():
             cite += f"\t{entr} = " + "{" + f"{entry.fields[entr]}" + "}, \n"
     cite += """}</pre></code>"""
-    s += " /" + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
+    s += (
+        " /"
+        + f"""<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{entry_key}" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapse{entry_key}"><div class="card card-body">{cite}</div></div>"""
+    )
     s += """ </div> </div> </div>"""
     return s
 
 
 def get_publications_html():
     parser = bibtex.Parser()
-    bib_data = parser.parse_file('publication_list.bib')
+    bib_data = parser.parse_file("publication_list.bib")
     keys = bib_data.entries.keys()
     s = ""
     for k in keys:
@@ -189,7 +214,7 @@ def get_publications_html():
 
 def get_talks_html():
     parser = bibtex.Parser()
-    bib_data = parser.parse_file('talk_list.bib')
+    bib_data = parser.parse_file("talk_list.bib")
     keys = bib_data.entries.keys()
     s = ""
     for k in keys:
@@ -199,7 +224,7 @@ def get_talks_html():
 
 def get_uni_html():
     parser = bibtex.Parser()
-    bib_data = parser.parse_file('uni_list.bib')
+    bib_data = parser.parse_file("uni_list.bib")
     keys = bib_data.entries.keys()
     s = ""
     for k in keys:
@@ -293,12 +318,12 @@ def get_index_html():
     return s
 
 
-def write_index_html(filename='index.html'):
+def write_index_html(filename="index.html"):
     s = get_index_html()
-    with open(filename, 'w') as f:
+    with open(filename, "w") as f:
         f.write(s)
-    print(f'Written index content to {filename}.')
+    print(f"Written index content to {filename}.")
 
 
-if __name__ == '__main__':
-    write_index_html('index.html')
+if __name__ == "__main__":
+    write_index_html("index.html")
