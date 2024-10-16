@@ -47,10 +47,18 @@ def get_personal_data():
 
 def get_author_dict():
     return {
-        "Andreas Geiger": "https://www.cvlibs.net/",
         "Kashyap Chitta": "https://kashyap7x.github.io/",
+        "Andreas Geiger": "https://www.cvlibs.net/",
         "Marcel Hallgarten": "https://mh0797.github.io/",
         "Bálint Mucsányi": "https://bmucsanyi.github.io/",
+        'Xinshuo Weng': 'https://research.nvidia.com/person/xinshuo-weng',
+        'Zhiyu Huang': 'https://mczhi.github.io/',
+        'Zetong Yang': 'https://scholar.google.com/citations?user=oPiZSVYAAAAJ&hl=en',
+        'Igor Gilitschenski': 'https://www.gilitschenski.org/igor/',
+        'Boris Ivanovic': 'https://www.borisivanovic.com/',
+        'Marco Pavone': 'https://web.stanford.edu/~pavone/',
+        'Hongyang Li': 'https://lihongyang.info/',
+        'Tianyu Li': 'https://www.linkedin.com/in/sephy-li/',
     }
 
 
@@ -83,7 +91,16 @@ def generate_person_html(
 
 def get_paper_entry(entry_key, entry):
     s = """<div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3">"""
-    s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
+    if "gif" in entry.fields.keys():
+        gif_container = f"""<div class="gif-container">
+            <img src="{entry.fields['img']}" class="static img-fluid img-thumbnail" alt="Static Image">
+            <img src="{entry.fields['gif']}" class="animated img-fluid img-thumbnail" alt="Animated GIF">
+        </div>"""
+        s += gif_container
+
+    else:
+
+        s += f"""<img src="{entry.fields['img']}" class="img-fluid img-thumbnail" alt="Project image">"""
     s += """</div><div class="col-sm-9">"""
 
     if "award" in entry.fields.keys():
@@ -237,6 +254,48 @@ def get_index_html():
     talks = get_talks_html()
     uni = get_uni_html()
     name, bio_text, footer = get_personal_data()
+    extra_style = r"""
+        <style>
+            .gif-container {
+                position: relative;
+                display: inline-block;
+            }
+            .static, .animated {
+                width: 100%; /* Ensures the images are responsive */
+            }
+            .static {
+                display: block;
+                max-width:100%;
+                height:auto;
+                padding:.25rem;
+                background-color:#fff;
+                border:1px solid #dee2e6;
+                border-radius:.25rem;
+                max-width:100%;
+                height:auto
+            }
+            
+            .animated {
+                display: none;
+                max-width:100%;
+                height:auto;
+                padding:.25rem;
+                background-color:#fff;
+                border:1px solid #dee2e6;
+                border-radius:.25rem;
+                max-width:100%;
+                height:auto
+            }
+            
+            .gif-container:hover .static {
+                display: none;
+            }
+            .gif-container:hover .animated {
+                display: block;
+            }
+        </style>
+    """
+    
     s = f"""
     <!doctype html>
 <html lang="en">
@@ -248,6 +307,7 @@ def get_index_html():
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {extra_style}
   <title>{name[0] + ' ' + name[1]}</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
@@ -285,12 +345,12 @@ def get_index_html():
                 {pub}
             </div>
         </div>
-        <div class="row" style="margin-top: 3em;">
+        <!-- <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>Invited Talks</h4>
                 {talks}
             </div>
-        </div> 
+        </div>  -->
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>University Projects</h4>

@@ -9,6 +9,47 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+        <style>
+            .gif-container {
+                position: relative;
+                display: inline-block;
+            }
+            .static, .animated {
+                width: 100%; /* Ensures the images are responsive */
+            }
+            .static {
+                display: block;
+                max-width:100%;
+                height:auto;
+                padding:.25rem;
+                background-color:#fff;
+                border:1px solid #dee2e6;
+                border-radius:.25rem;
+                max-width:100%;
+                height:auto
+            }
+            
+            .animated {
+                display: none;
+                max-width:100%;
+                height:auto;
+                padding:.25rem;
+                background-color:#fff;
+                border:1px solid #dee2e6;
+                border-radius:.25rem;
+                max-width:100%;
+                height:auto
+            }
+            
+            .gif-container:hover .static {
+                display: none;
+            }
+            .gif-container:hover .animated {
+                display: block;
+            }
+        </style>
+    
   <title>Daniel Dauner</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
@@ -67,12 +108,26 @@
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>Publications</h4>
-                <div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><img src="assets/img/publications/Chitta2024ECCV.png" class="img-fluid img-thumbnail" alt="Project image"></div><div class="col-sm-9"><a href="https://arxiv.org/abs/2403.17933" target="_blank">SLEDGE: Synthesizing Driving Environments with Generative Models and Rule-Based Traffic</a> <br><a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a>*, <span style="font-weight: bold";>Daniel Dauner</span>*, <a href="https://www.cvlibs.net/" target="_blank">Andreas Geiger</a> <br><span style="font-style: italic;">European Conference on Computer Vision (ECCV)</span>, 2024 <br><a href="https://arxiv.org/pdf/2403.17933" target="_blank">Paper</a> / <a href="https://danieldauner.github.io/assets/pdf/Chitta2024ARXIV_supplementary.pdf" target="_blank">Supplemental</a> / <a href="https://github.com/autonomousvision/sledge" target="_blank">Code</a> /<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseChitta2024ECCV" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapseChitta2024ECCV"><div class="card card-body"><pre><code>@inproceedings{Chitta2024ECCV, 
+                <div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><div class="gif-container">
+            <img src="assets/img/publications/Dauner2024NIPS.png" class="static img-fluid img-thumbnail" alt="Static Image">
+            <img src="assets/img/publications//gifs/Dauner2024NIPS.gif" class="animated img-fluid img-thumbnail" alt="Animated GIF">
+        </div></div><div class="col-sm-9"><a href="https://arxiv.org/abs/2406.15349" target="_blank">NAVSIM: Data-Driven Non-Reactive Autonomous Vehicle Simulation and Benchmarking</a> <br><span style="font-weight: bold";>Daniel Dauner</span>, <a href="https://mh0797.github.io/" target="_blank">Marcel Hallgarten</a>, <a href="https://www.linkedin.com/in/sephy-li/" target="_blank">Tianyu Li</a>, <a href="https://research.nvidia.com/person/xinshuo-weng" target="_blank">Xinshuo Weng</a>, <a href="https://mczhi.github.io/" target="_blank">Zhiyu Huang</a>, <a href="https://scholar.google.com/citations?user=oPiZSVYAAAAJ&hl=en" target="_blank">Zetong Yang</a>, <a href="https://lihongyang.info/" target="_blank">Hongyang Li</a>, <a href="https://www.gilitschenski.org/igor/" target="_blank">Igor Gilitschenski</a>, <a href="https://www.borisivanovic.com/" target="_blank">Boris Ivanovic</a>, <a href="https://web.stanford.edu/~pavone/" target="_blank">Marco Pavone</a>, <a href="https://www.cvlibs.net/" target="_blank">Andreas Geiger</a>, <a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a> <br><span style="font-style: italic;">Advances in Neural Information Processing Systems (NeurIPS)</span>, 2024 <br><a href="https://arxiv.org/pdf/2406.15349" target="_blank">Paper</a> / <a href="https://github.com/autonomousvision/navsim" target="_blank">Code</a> /<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDauner2024NIPS" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapseDauner2024NIPS"><div class="card card-body"><pre><code>@inProceedings{Dauner2024NIPS, 
+	author = {Daniel Dauner and Marcel Hallgarten and Tianyu Li and Xinshuo Weng and Zhiyu Huang and Zetong Yang and Hongyang Li and Igor Gilitschenski and Boris Ivanovic and Marco Pavone and Andreas Geiger and Kashyap Chitta}, 
+	title = {NAVSIM: Data-Driven Non-Reactive Autonomous Vehicle Simulation and Benchmarking}, 
+	booktitle = {Advances in Neural Information Processing Systems (NeurIPS)}, 
+	year = {2024}, 
+}</pre></code></div></div> </div> </div> </div><div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><div class="gif-container">
+            <img src="assets/img/publications/Chitta2024ECCV.png" class="static img-fluid img-thumbnail" alt="Static Image">
+            <img src="assets/img/publications/gifs/Chitta2024ECCV.gif" class="animated img-fluid img-thumbnail" alt="Animated GIF">
+        </div></div><div class="col-sm-9"><a href="https://arxiv.org/abs/2403.17933" target="_blank">SLEDGE: Synthesizing Driving Environments with Generative Models and Rule-Based Traffic</a> <br><a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a>*, <span style="font-weight: bold";>Daniel Dauner</span>*, <a href="https://www.cvlibs.net/" target="_blank">Andreas Geiger</a> <br><span style="font-style: italic;">European Conference on Computer Vision (ECCV)</span>, 2024 <br><a href="https://arxiv.org/pdf/2403.17933" target="_blank">Paper</a> / <a href="https://danieldauner.github.io/assets/pdf/Chitta2024ARXIV_supplementary.pdf" target="_blank">Supplemental</a> / <a href="https://github.com/autonomousvision/sledge" target="_blank">Code</a> /<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseChitta2024ECCV" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapseChitta2024ECCV"><div class="card card-body"><pre><code>@inproceedings{Chitta2024ECCV, 
 	author = {Kashyap Chitta and Daniel Dauner and Andreas Geiger}, 
 	title = {SLEDGE: Synthesizing Driving Environments with Generative Models and Rule-Based Traffic}, 
 	booktitle = {European Conference on Computer Vision (ECCV)}, 
 	year = {2024}, 
-}</pre></code></div></div> </div> </div> </div><div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><img src="assets/img/publications/Dauner2023CORL.png" class="img-fluid img-thumbnail" alt="Project image"></div><div class="col-sm-9"><a href="https://arxiv.org/abs/2306.07962" target="_blank">Parting with Misconceptions about Learning-based Vehicle Motion Planning</a> <span style="color: red;">(Winner, 2023 nuPlan Challenge)</span><br><span style="font-weight: bold";>Daniel Dauner</span>, <a href="https://mh0797.github.io/" target="_blank">Marcel Hallgarten</a>, <a href="https://www.cvlibs.net/" target="_blank">Andreas Geiger</a>, <a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a> <br><span style="font-style: italic;">Conference on Robot Learning (CoRL)</span>, 2023 <br><a href="https://arxiv.org/pdf/2306.07962.pdf" target="_blank">Paper</a> / <a href="https://danieldauner.github.io/assets/pdf/Dauner2023CORL_supplementary.pdf" target="_blank">Supplemental</a> / <a href="https://youtu.be/iI5iy5QLv6g" target="_blank">Video</a> / <a href="https://danieldauner.github.io/assets/pdf/Dauner2023CORL_poster.pdf" target="_blank">Poster</a> / <a href="https://github.com/autonomousvision/tuplan_garage" target="_blank">Code</a> /<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDauner2023CORL" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapseDauner2023CORL"><div class="card card-body"><pre><code>@inproceedings{Dauner2023CORL, 
+}</pre></code></div></div> </div> </div> </div><div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><div class="gif-container">
+            <img src="assets/img/publications/Dauner2023CORL.png" class="static img-fluid img-thumbnail" alt="Static Image">
+            <img src="assets/img/publications/gifs/Dauner2023CORL.png" class="animated img-fluid img-thumbnail" alt="Animated GIF">
+        </div></div><div class="col-sm-9"><a href="https://arxiv.org/abs/2306.07962" target="_blank">Parting with Misconceptions about Learning-based Vehicle Motion Planning</a> <span style="color: red;">(Winner, 2023 nuPlan Challenge)</span><br><span style="font-weight: bold";>Daniel Dauner</span>, <a href="https://mh0797.github.io/" target="_blank">Marcel Hallgarten</a>, <a href="https://www.cvlibs.net/" target="_blank">Andreas Geiger</a>, <a href="https://kashyap7x.github.io/" target="_blank">Kashyap Chitta</a> <br><span style="font-style: italic;">Conference on Robot Learning (CoRL)</span>, 2023 <br><a href="https://arxiv.org/pdf/2306.07962.pdf" target="_blank">Paper</a> / <a href="https://danieldauner.github.io/assets/pdf/Dauner2023CORL_supplementary.pdf" target="_blank">Supplemental</a> / <a href="https://youtu.be/iI5iy5QLv6g" target="_blank">Video</a> / <a href="https://danieldauner.github.io/assets/pdf/Dauner2023CORL_poster.pdf" target="_blank">Poster</a> / <a href="https://github.com/autonomousvision/tuplan_garage" target="_blank">Code</a> /<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDauner2023CORL" aria-expanded="false" aria-controls="collapseExample" style="margin-left: -6px; margin-top: -2px;">Expand bibtex</button><div class="collapse" id="collapseDauner2023CORL"><div class="card card-body"><pre><code>@inproceedings{Dauner2023CORL, 
 	author = {Daniel Dauner and Marcel Hallgarten and Andreas Geiger and Kashyap Chitta}, 
 	title = {Parting with Misconceptions about Learning-based Vehicle Motion Planning}, 
 	booktitle = {Conference on Robot Learning (CoRL)}, 
@@ -85,12 +140,12 @@
 }</pre></code></div></div> </div> </div> </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 3em;">
+        <!-- <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>Invited Talks</h4>
                 <div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><img src="assets/img/talks/Dauner2024Bosch.png" class="img-fluid img-thumbnail" alt="Project image"></div><div class="col-sm-9">Synthesizing Driving Environments with Generative Models<br><span style="font-style: italic;">Robert Bosch GmbH</span>, 2024 <br><a href="https://docs.google.com/presentation/d/1PviKQTXgO5qVvspDO89ljS2-S-4zBPHYN5XrevfLZbY/edit?usp=sharing" target="_blank">Slides</a> </div> </div> </div><div style="margin-bottom: 3em;"> <div class="row"><div class="col-sm-3"><img src="assets/img/talks/Dauner2023Mercedes.png" class="img-fluid img-thumbnail" alt="Project image"></div><div class="col-sm-9">Vehicle Motion Planning using Data-Driven Simulation<br><span style="font-style: italic;">Mercedes-Benz AG</span>, 2023 <br><a href="https://docs.google.com/presentation/d/1PwZEvi_ejtgK26crVFn0v1Od1F29rUI36d3fDgOfImk/edit?usp=sharing" target="_blank">Slides</a> </div> </div> </div>
             </div>
-        </div> 
+        </div>  -->
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>University Projects</h4>
