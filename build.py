@@ -5,7 +5,6 @@ def get_personal_data():
     name = ["Daniel", "Dauner"]
     email = "daniel.dauner@gmail.com"
     scholar = "tZqIYDcAAAAJ"
-    twitter = "DanielDauner"
     bsky = "danieldauner.bsky.social"
     github = "DanielDauner"
     linkedin = "daniel-dauner"
@@ -31,7 +30,6 @@ def get_personal_data():
                     <a href="https://scholar.google.com/citations?user={scholar}&hl=en" target="_blank" style="margin-right: 15px"><i class="fa-solid fa-graduation-cap"></i> Scholar</a>
                     <a href="https://github.com/{github}" target="_blank" style="margin-right: 15px"><i class="fab fa-github fa-lg"></i> Github</a>
                     <a href="https://bsky.app/profile/{bsky}" target="_blank" style="margin-right: 15px"><i class="fab fa-bluesky fa-lg"></i> Bluesky</a>
-                    <a href="https://twitter.com/{twitter}" target="_blank" style="margin-right: 15px"><i class="fab fa-x-twitter fa-lg"></i> Twitter</a>
                     <a href="https://www.linkedin.com/in/{linkedin}" target="_blank" style="margin-right: 15px"><i class="fab fa-linkedin fa-lg"></i> LinkedIn</a>
                     <a href="https://www.youtube.com/{youtube}" target="_blank" style="margin-right: 15px"><i class="fab fa-youtube fa-lg"></i> YouTube</a>
                 </p>
