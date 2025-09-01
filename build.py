@@ -51,14 +51,24 @@ def get_author_dict():
         "Andreas Geiger": "https://www.cvlibs.net/",
         "Marcel Hallgarten": "https://mh0797.github.io/",
         "Bálint Mucsányi": "https://bmucsanyi.github.io/",
-        'Xinshuo Weng': 'https://research.nvidia.com/person/xinshuo-weng',
-        'Zhiyu Huang': 'https://mczhi.github.io/',
-        'Zetong Yang': 'https://scholar.google.com/citations?user=oPiZSVYAAAAJ&hl=en',
-        'Igor Gilitschenski': 'https://www.gilitschenski.org/igor/',
-        'Boris Ivanovic': 'https://www.borisivanovic.com/',
-        'Marco Pavone': 'https://web.stanford.edu/~pavone/',
-        'Hongyang Li': 'https://lihongyang.info/',
-        'Tianyu Li': 'https://www.linkedin.com/in/sephy-li/',
+        "Xinshuo Weng": "https://research.nvidia.com/person/xinshuo-weng",
+        "Zhiyu Huang": "https://mczhi.github.io/",
+        "Zetong Yang": "https://scholar.google.com/citations?user=oPiZSVYAAAAJ&hl=en",
+        "Igor Gilitschenski": "https://www.gilitschenski.org/igor/",
+        "Boris Ivanovic": "https://www.borisivanovic.com/",
+        "Marco Pavone": "https://web.stanford.edu/~pavone/",
+        "Hongyang Li": "https://lihongyang.info/",
+        "Tianyu Li": "https://www.linkedin.com/in/sephy-li/",
+        "Wei Cao": "https://vveicao.github.io/",
+        "Xunjiang Gu": "https://alfredgu001324.github.io/",
+        "Caojun Wang": "https://scholar.google.com/citations?user=35xHlDUAAAAJ",
+        "Yakov Miron": "https://www.linkedin.com/in/yakov-miron-0826121b/",
+        "Marco Aiello": "http://aiellom.it/",
+        "Simon Gerstenecker": "https://www.linkedin.com/in/simon-gerstenecker/",
+        "Xinshuo Weng": "https://research.nvidia.com/person/xinshuo-weng",
+        "Zhiyu Huang": "https://mczhi.github.io/",
+        "Jens Beißwenger": "https://www.linkedin.com/in/jens-beißwenger-a82430258",
+        "Bernhard Jaeger": "https://kait0.github.io/",
     }
 
 
@@ -295,7 +305,7 @@ def get_index_html():
             }
         </style>
     """
-    
+
     s = f"""
     <!doctype html>
 <html lang="en">
