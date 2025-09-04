@@ -355,18 +355,18 @@ def get_index_html():
                 {pub}
             </div>
         </div>
-        <!-- <div class="row" style="margin-top: 3em;">
+        <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>Invited Talks</h4>
                 {talks}
             </div>
-        </div>  -->
+        </div>
         <div class="row" style="margin-top: 3em;">
             <div class="col-sm-12" style="">
                 <h4>University Projects</h4>
                 {uni}
             </div>
-        </div> 
+        </div>
         <div class="row" style="margin-top: 3em; margin-bottom: 1em;">
             {footer}
         </div>
